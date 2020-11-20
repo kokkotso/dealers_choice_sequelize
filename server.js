@@ -1,5 +1,5 @@
 const express = require("express");
-const { db, dbTest } = require("./db");
+const { db, dbTest, dbSync, dbSeed } = require("./db");
 
 const port = process.env.PORT || 3000;
 
@@ -14,7 +14,9 @@ app.listen(port, () => {
 });
 
 const init = async () => {
-	dbTest();
+	await dbTest();
+	await dbSync();
+	await dbSeed();
 };
 
 init();

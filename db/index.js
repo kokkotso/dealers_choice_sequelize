@@ -48,24 +48,27 @@ const Trainer = db.define("trainer", {
 	name: {
 		type: DataTypes.STRING,
 	},
+	img: {
+		type: DataTypes.STRING,
+		defaultValue: "https://via.placeholder.com/720",
+	},
 });
 
 // Define associations
-Trainer.belongsToMany(Pokemon, { through: "trainer_pokemon" });
-Pokemon.belongsToMany(Trainer, { through: "trainer_pokemon" });
-
-Pokemon.hasOne(Pokemon, {
-	foreignKey: "evolves_to",
+Trainer.belongsToMany(Pokemon, {
+	through: "captures",
 });
+Pokemon.belongsToMany(Trainer, {
+	through: "captures",
+});
+
 Pokemon.belongsTo(Pokemon, {
 	foreignKey: "evolves_from",
+	defaultValue: null,
 });
 Pokemon.belongsTo(Type);
 
 Type.hasMany(Pokemon);
-Type.hasOne(Type, {
-	foreignKey: "strength",
-});
 Type.hasOne(Type, {
 	foreignKey: "weakness",
 });
@@ -81,7 +84,17 @@ const dbSeed = async () => {
 		Type.create({ name: "Ground" }),
 	]);
 
-	// Pokemon
+	electric.weakness = ground.id;
+	water.weakness = electric.id;
+	fire.weakness = water.id;
+	grass.weakness = fire.id;
+	ground.weakness = grass.id;
+
+	[electric, water, fire, grass, ground].forEach(async (type) => {
+		await type.save();
+	});
+
+	// Pokemons
 	const pikachu = await Pokemon.create({
 		name: "Pikachu",
 		description:
@@ -110,6 +123,9 @@ const dbSeed = async () => {
 		}),
 	]);
 
+	charmeleon.evolves_from = charmander.id;
+	charizard.evolves_from = charmeleon.id;
+
 	const [squirtle, wartortle, blastoise] = await Promise.all([
 		Pokemon.create({
 			name: "Squirtle",
@@ -130,6 +146,9 @@ const dbSeed = async () => {
 			typeId: water.id,
 		}),
 	]);
+
+	wartortle.evolves_from = squirtle.id;
+	blastoise.evolves_from = wartortle.id;
 
 	const [bulbasaur, ivysaur, venusaur] = await Promise.all([
 		Pokemon.create({
@@ -152,6 +171,9 @@ const dbSeed = async () => {
 		}),
 	]);
 
+	ivysaur.evolves_from = bulbasaur.id;
+	venusaur.evolves_from = ivysaur.id;
+
 	const [diglett, dugtrio] = await Promise.all([
 		Pokemon.create({
 			name: "Diglett",
@@ -165,6 +187,38 @@ const dbSeed = async () => {
 				"A team of triplets that can burrow over 60 MPH. Due to this, some people think it’s an earthquake.",
 			typeId: ground.id,
 		}),
+	]);
+
+	[
+		pikachu,
+		charmeleon,
+		charmeleon,
+		charizard,
+		squirtle,
+		wartortle,
+		blastoise,
+		bulbasaur,
+		ivysaur,
+		venusaur,
+		diglett,
+		dugtrio,
+	].forEach(async (pokemon) => {
+		await pokemon.save();
+	});
+
+	// Trainers
+	const [yellow, red, gary] = await Promise.all([
+		Trainer.create({ name: "Yellow" }),
+		Trainer.create({ name: "Red" }),
+		Trainer.create({ name: "Gary" }),
+	]);
+
+	await Promise.all([
+		yellow.addPokemon(pikachu, { through: { selfGranted: false } }),
+		yellow.addPokemon(bulbasaur, { through: { selfGranted: false } }),
+		red.addPokemon(diglett, { through: { selfGranted: false } }),
+		red.addPokemon(charmeleon, { through: { selfGranted: false } }),
+		gary.addPokemon(squirtle, { through: { selfGranted: false } }),
 	]);
 };
 

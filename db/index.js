@@ -237,4 +237,7 @@ module.exports = {
 	dbTest,
 	dbSeed,
 	dbSync,
+	Pokemon,
+	Trainer,
+	Type,
 };

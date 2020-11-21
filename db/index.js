@@ -77,11 +77,11 @@ Type.hasOne(Type, {
 const dbSeed = async () => {
 	// Types
 	const [electric, water, fire, grass, ground] = await Promise.all([
-		Type.create({ name: "Electric" }),
-		Type.create({ name: "Water" }),
-		Type.create({ name: "Fire" }),
-		Type.create({ name: "Grass" }),
-		Type.create({ name: "Ground" }),
+		Type.create({ name: "electric" }),
+		Type.create({ name: "water" }),
+		Type.create({ name: "fire" }),
+		Type.create({ name: "grass" }),
+		Type.create({ name: "ground" }),
 	]);
 
 	electric.weakness = ground.id;

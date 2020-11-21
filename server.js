@@ -42,12 +42,39 @@ app.get("/", async (req, res) => {
                 ${query
 									.map((pokemon) => {
 										return `
-                        <div class="card ${pokemon.type.name.toLowerCase()}">
+                        <div class="card ${pokemon.type.name}">
                             <img src="${pokemon.img}" />
                             <p class="title">${pokemon.name}</p>
-                            <p class="cta"><a href="/pokemon/${
-															pokemon.id
-														}">See Pokedex Entry</a></p>
+                            <p class="cta"><a href="/pokemon/${pokemon.id}">See Pokedex Entry</a></p>
+                        </div>
+                    `;
+									})
+									.join("")}
+        </section>
+        ${htmlFooter}
+    `;
+	res.send(html);
+});
+
+app.get("/types/:id", async (req, res) => {
+	const id = req.params.id;
+	const query = await Pokemon.findAll({
+		where: {
+			typeId: id,
+		},
+		include: Type,
+	});
+	const html = `
+        ${htmlHead}
+        ${htmlNav}
+        <section class="card-grid">
+                ${query
+									.map((pokemon) => {
+										return `
+                        <div class="card ${pokemon.type.name}">
+                            <img src="${pokemon.img}" />
+                            <p class="title">${pokemon.name}</p>
+                            <p class="cta"><a href="/pokemon/${pokemon.id}">See Pokedex Entry</a></p>
                         </div>
                     `;
 									})
@@ -99,9 +126,7 @@ app.get("/pokemon/:id", async (req, res) => {
             <div class="callout-caption">
                 <div class="callout-text">
                     <h1>${currPokemon.name}</h1>
-                    <h2><a href="/types/${currPokemon.type.name.toLowerCase()}">${
-		currPokemon.type.name
-	} Type Pokemon</a></h2>
+                    <h2><a href="/types/${currPokemon.typeId}">${currPokemon.type.name} Type Pokemon</a></h2>
                     <p>${currPokemon.description}</p>
                 </div>
                 <div class="callout-footer">

@@ -201,6 +201,8 @@ const dbSeed = async () => {
 		}),
 	]);
 
+	dugtrio.evolves_from = diglett.id;
+
 	[
 		pikachu,
 		charmeleon,

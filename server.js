@@ -1,5 +1,6 @@
 const express = require("express");
 const { db, dbTest, dbSync, dbSeed } = require("./db");
+const path = require("path");
 
 const port = process.env.PORT || 3000;
 

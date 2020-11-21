@@ -13,6 +13,7 @@ const htmlHead = `
         <head>
             <title>Pokedex</title>
             <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="/styles.css" />
         </head>
         <body>
 `;
@@ -31,6 +32,8 @@ const htmlFooter = `
         </body>
     </html>
 `;
+
+app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
 	const query = await Pokemon.findAll({ include: Type });
@@ -97,22 +100,24 @@ app.get("/pokemon/:id", async (req, res) => {
         <section class="callout-main">
             <img src="${currPokemon.img}" />
             <div class="callout-caption">
-                <h1>${currPokemon.name}</h1>
-                <h2><a href="/types/${currPokemon.type.name.toLowerCase()}">${
+                <div class="callout-text">
+                    <h1>${currPokemon.name}</h1>
+                    <h2><a href="/types/${currPokemon.type.name.toLowerCase()}">${
 		currPokemon.type.name
 	} Type Pokemon</a></h2>
-                <p>${currPokemon.description}</p>
+                    <p>${currPokemon.description}</p>
+                </div>
+                <div class="callout-footer">
+                    <div class="evolved-from">
+                        <p>Evolved From:</p>
+                        ${htmlPreviousForm}
+                     </div>
+                <div class="evolves-to">
+                    <p>Evolves Into:</p>
+                    ${htmlEvolvedForm}
+                </div>
              </div>
-        </section>
-        <section class="callout-footer">
-            <div class="evolved-from">
-                <p>Evolved From:</p>
-                ${htmlPreviousForm}
-            </div>
-            <div class="evolves-to">
-                <p>Evolves Into:</p>
-                ${htmlEvolvedForm}
-            </div>
+        </div>
         </section>
         ${htmlFooter}
     `;

@@ -23,19 +23,24 @@ header {
 	margin-left: 1em;
 }
 
+.nav-logo a {
+	text-decoration: none;
+	color: white;
+}
+
 .card-grid {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: center;
 	padding: 10px 10px;
 }
 
 .card {
 	flex: 0 1 300px;
 	border: 1px solid black;
-	margin: 10px 0;
+	margin: 10px 10px;
 	text-align: center;
 }
 
@@ -52,11 +57,11 @@ img {
 }
 
 .callout-main > img {
-	flex: 1 0 300px;
+	flex: 1;
 }
 
 .callout-caption {
-	flex: 2;
+	flex: 1;
 }
 
 .callout-caption {
@@ -70,4 +75,24 @@ img {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+
+.electric {
+	background-color: lightgoldenrodyellow;
+}
+
+.water {
+	background-color: lightblue;
+}
+
+.grass {
+	background-color: lightgreen;
+}
+
+.fire {
+	background-color: lightsalmon;
+}
+
+.ground {
+	background-color: tan;
 }

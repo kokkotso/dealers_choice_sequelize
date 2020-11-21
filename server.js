@@ -20,9 +20,7 @@ const htmlHead = `
 
 const htmlNav = `
         <header>
-            <div class="nav-logo">Pokedex</div>
-            <nav>
-            </nav>
+            <div class="nav-logo"><a href="/">Pokedex</a></div>
         </header>
         <main>
 `;
@@ -40,7 +38,6 @@ app.get("/", async (req, res) => {
 	const html = `
         ${htmlHead}
         ${htmlNav}
-        <h2>Pokemon</h2>
         <section class="card-grid">
                 ${query
 									.map((pokemon) => {

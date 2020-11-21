@@ -100,6 +100,7 @@ const dbSeed = async () => {
 		description:
 			"It keeps its tail raised to monitor its surroundings. If you yank its tail, it will try to bite you.",
 		typeId: electric.id,
+		img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",
 	});
 
 	const [charmander, charmeleon, charizard] = await Promise.all([
@@ -108,18 +109,21 @@ const dbSeed = async () => {
 			description:
 				"The flame at the tip of its tail makes a sound as it burns. You can only hear it in quiet places.",
 			typeId: fire.id,
+			img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png",
 		}),
 		Pokemon.create({
 			name: "Charmeleon",
 			description:
 				"Tough fights could excite this POKéMON. When excited, it may blow out bluish-white flames.",
 			typeId: fire.id,
+			img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png",
 		}),
 		Pokemon.create({
 			name: "Charizard",
 			description:
 				"When expelling a blast of super hot fire, the red flame at the tip of its tail burns more intensely.",
 			typeId: fire.id,
+			img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png",
 		}),
 	]);
 
@@ -132,18 +136,21 @@ const dbSeed = async () => {
 			description:
 				"Shoots water at prey while in the water. Withdraws into its shell when in danger.",
 			typeId: water.id,
+			img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png",
 		}),
 		Pokemon.create({
 			name: "Wartortle",
 			description:
 				"When tapped, this Pokemon will pull in its head, but its tail will still stick out a little bit.",
 			typeId: water.id,
+			img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png",
 		}),
 		Pokemon.create({
 			name: "Blastoise",
 			description:
 				"Once it takes aim at its enemy, it blasts out water with even more force than a fire hose.",
 			typeId: water.id,
+			img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/009.png",
 		}),
 	]);
 
@@ -156,18 +163,21 @@ const dbSeed = async () => {
 			description:
 				"It can go for days without eating a single morsel. In the bulb on its back, it stores energy.",
 			typeId: grass.id,
+			img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
 		}),
 		Pokemon.create({
 			name: "Ivysaur",
 			description:
 				"The bulb on its back grows by drawing energy. It gives off an aroma when it is ready to bloom.",
 			typeId: grass.id,
+			img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png",
 		}),
 		Pokemon.create({
 			name: "Venusaur",
 			description:
 				"The flower on its back catches the sun’s rays. The sunlight is then absorbed and used for energy.",
 			typeId: grass.id,
+			img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png",
 		}),
 	]);
 
@@ -180,12 +190,14 @@ const dbSeed = async () => {
 			description:
 				"It prefers dark places. It spends most of its time underground, though it may pop up in caves.",
 			typeId: ground.id,
+			img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/050.png",
 		}),
 		Pokemon.create({
 			name: "Dugtrio",
 			description:
 				"A team of triplets that can burrow over 60 MPH. Due to this, some people think it’s an earthquake.",
 			typeId: ground.id,
+			img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/051.png",
 		}),
 	]);
 
